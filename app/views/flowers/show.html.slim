@@ -1,0 +1,17 @@
+h2.up = @flower.name
+
+p
+  | #{@flower.description}
+p
+  | Цена: #{@flower.price} руб.
+p
+  -if @flower.availability != 0 && !@flower.availability.nil?
+    | Наличие: #{@flower.availability} шт.
+  -else
+    | Нет в наличии
+p
+  - if !@flower.attachments.empty?
+  br
+    - @flower.attachments.each do |image|
+	    .show-box    	
+        = image_tag(image.img.url(:small))

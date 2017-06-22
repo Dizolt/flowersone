@@ -1,0 +1,21 @@
+h3.up.txt-mid = @category.name
+
+- if @flowers.empty?
+  | В данный момент цветы отсутствуют
+- else
+  - @flowers.each do |i|
+    .line-box.bot
+      .col-3.hid
+        = link_to flower_path(i.id) do
+          -if !i.attachments.empty?
+            = image_tag (i.attachments.first.img.url(:small)), size: "220x249"
+          -else
+            = "Нет изображения"
+      .col-3.fix.hd
+        = link_to i.name, flower_path(i)
+      .col-3.fix.hiid
+        | #{i.price} руб.
+      .col-3.fix.hidd
+        | #{i.availability} шт.
+.paginate
+  = will_paginate @flowers

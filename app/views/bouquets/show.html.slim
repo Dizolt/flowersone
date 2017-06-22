@@ -1,0 +1,10 @@
+h2.up = @bouquet.name
+
+p
+  | #{@bouquet.description}
+p
+  - if !@bouquet.attachments.empty?
+  br
+    - @bouquet.attachments.each do |image|
+	    .show-box    	
+        = image_tag(image.img.url(:small))

@@ -1,0 +1,13 @@
+table
+    tr
+    - if @categories.empty?
+      | Категории еще не созданы
+    - else
+      - @categories.each do |cat|
+        .box
+          = link_to flow_path(cat) do
+            .col-12
+              = image_tag (cat.image.url(:small)), size: "200x250"
+            br
+          .col-12.cat-title
+            = link_to(cat.name, flowers_path(cat))

@@ -1,0 +1,21 @@
+h2 = @flower.name
+
+p
+  | Описание: #{@flower.description}
+p
+  | Цена: #{@flower.price}
+p
+  -if @flower.availability > 0
+    | Наличие: #{@flower.availability} шт.
+  -else
+    | Нет в наличии
+p
+  - if !@flower.attachments.empty?
+  h3 Изображения:
+  br
+    - @flower.attachments.each do |image|
+      .img-box
+        = image_tag(image.img.url(:small))
+    p
+    br
+= link_to "Редактировать", edit_admin_flower_path, class: "btn"

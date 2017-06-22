@@ -1,0 +1,22 @@
+h1 Советы
+
+= active_link_to "Добавить совет", "/admin/advices/new", class: "btn btn-primary green"
+p
+- if @advices.empty?
+  b  Не создано ни одного совета
+- else
+  .advices-table
+    table
+      tr
+        th изображение
+        th название
+        th удалить
+      - @advices.each do |i|
+        tr
+          -if !i.attachments.empty?
+            td= image_tag (i.attachments.first.img.url(:thumb))
+          -else
+            td= "Нет изображения"
+          td= link_to i.name, admin_advice_path(i)
+          td= link_to admin_advice_path(i), method: :delete, data: { confirm: 'Точно удалить?' } do
+              i.fa.fa-times

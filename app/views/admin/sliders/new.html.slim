@@ -1,0 +1,20 @@
+h1 Добавление слайдов
+
+= form_for [:admin,@slider] do |f|
+  - if @slider.errors.any?
+    h2 Ошибки:
+    ul
+      - @slider.errors.full_messages.each do |err|
+        li
+          = err.humanize
+  h3 Изображения:
+  #attachments
+    = f.fields_for :attachments do |attachment|
+      = render 'attachment_fields', f: attachment
+    .links
+      = link_to_add_association 'Добавить изображение', f, :attachments
+  br
+
+  = f.submit "Сохранить", class: "btn btn-primary green"
+.position.top
+  = link_to 'Назад', admin_sliders_path, class: "btn"

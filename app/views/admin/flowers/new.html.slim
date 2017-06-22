@@ -1,0 +1,31 @@
+h1 Добавление цветов
+
+= form_for [:admin,@flower] do |f|
+  - if @flower.errors.any?
+    h2 Ошибки:
+    ul
+      - @flower.errors.full_messages.each do |err|
+        li
+          = err.humanize
+      p
+  p Категория:
+  = f.select(:category_id, options_from_collection_for_select(Category.all, 'id', 'name', @flower.category_id), { include_blank: 'Выберите категорию' }, class: "form-control")
+  p Название:
+  = f.text_field :name
+  p Описание:
+  = f.text_area :description
+  p Цена:
+  = f.number_field :price
+  p Наличие:
+  = f.number_field :availability
+  h3 Изображения:
+  #attachments
+    = f.fields_for :attachments do |attachment|
+      = render 'attachment_fields', f: attachment
+    .links
+      = link_to_add_association 'Добавить изображение', f, :attachments
+  br
+
+  = f.submit "Создать", class: "btn btn-primary green"
+.position.top
+  = link_to 'Назад', admin_flowers_path, class: "btn"

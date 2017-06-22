@@ -1,0 +1,26 @@
+h1 Редактировать
+
+= form_for [:admin,@category] do |f|
+  - if @category.errors.any?
+    h2 Ошибки:
+    ul
+      - @category.errors.full_messages.each do |err|
+        li
+          = err.humanize
+      p
+
+  .box
+    -if @category.image?
+      = image_tag (@category.image.url(:small)), size: "200x250"
+    -else
+      | "Изображение еще не загружено"
+    .del
+      p Название категории:
+      = f.text_field :name
+  h3 Изображение:
+  = f.file_field :image
+  p
+
+  = f.submit "Сохранить", class: "btn btn-primary green"
+.position.top
+  = link_to 'Назад', admin_categories_path, class: "btn"

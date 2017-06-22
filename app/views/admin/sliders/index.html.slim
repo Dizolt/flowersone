@@ -1,0 +1,28 @@
+h1 Слайдер
+
+= link_to "Добавить слайды", "/admin/sliders/new", class: "btn btn-primary green"
+br
+br
+
+- if @slides.empty?
+  b Нет слайдов
+- else
+  .slideshow-container
+	  - @slides.each do |i|
+	    = image_tag (i.img.url(:large)), width: "100%", class: "mySlides fade"
+      a.prev onclick="plusSlides(-1)"
+      	i.material-icons.icons_align.icon.back keyboard_arrow_left
+      a.next onclick="plusSlides(1)"
+      	i.material-icons.icons_align.icon.back keyboard_arrow_right
+  table
+    tr
+      th изображение
+      th удалить
+    - @slides.each do |i|
+      tr
+        -if !i.nil?
+          td= image_tag (i.img.url(:thumb))
+        -else
+          td= "Нет изображения"
+        td= link_to admin_slider_attachment_path(i.attachmentable_id,i.id), method: :delete, data: { confirm: 'Точно удалить?' } do
+            i.fa.fa-times

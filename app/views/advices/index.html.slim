@@ -1,0 +1,17 @@
+- if @advices.empty?
+  | Еще не создано ни одного совета
+- else
+  - @advices.each do |i|
+    .line-box.bot
+      .col-4
+        = link_to advice_path(i) do
+          -if !i.attachments.empty?
+            = image_tag (i.attachments.first.img.url(:small)), size: "220x249"
+          -else
+            | Нет изображения
+      .col-4.fix.wdt.otst
+        = link_to i.name, advice_path(i)
+      .col-4.hide.tp
+        | #{i.title}
+.paginate
+  = will_paginate @advices

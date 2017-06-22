@@ -1,0 +1,18 @@
+h2 = @advice.name
+
+p
+  | Краткое описание: #{@advice.title}
+p
+  | Описание: #{@advice.description}
+p
+  - if !@advice.attachments.empty?
+  h3 Изображения:
+  br
+  	.box
+  	 .col-12
+	     - @advice.attachments.each do |image|
+	       .col-4
+	      	= image_tag(image.img.url(:small))
+    p
+    br
+= link_to "Редактировать", edit_admin_advice_path, class: "btn"

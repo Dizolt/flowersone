@@ -1,0 +1,38 @@
+h1 Цветы
+
+= form_for_filterrific @filterrific do |f|
+  = f.select(:by_category,@filterrific.select_options[:by_category], { include_blank: 'Выберите категорию' }, class: "form-control")
+  .position
+    = link_to 'Очистить', reset_filterrific_url, class: "btn btn-primary clear"
+    = f.submit 'Выбрать', class: "btn", style: "margin-left: 5px;"
+    p
+
+= link_to "Добавить цветы", "/admin/flowers/new", class: "btn btn-primary green"
+p
+- if @flowers.empty?
+  b Еще не созданно ни одного цветка
+- else
+  .flow-table
+    table
+      tr
+        th изображение
+        th название
+        th цена
+        th наличие
+        th удалить
+      - @flowers.each do |i|
+        tr
+          -if !i.attachments.empty?
+            td= image_tag (i.attachments.first.img.url(:thumb))
+          -else
+            td= "Нет изображения"
+          td= link_to i.name, admin_flower_path(i)
+          td= "#{i.price} руб."
+          -if i.availability > 0
+            td= "#{i.availability} шт."
+          -else
+            td= "Нет в наличии"
+          td= link_to admin_flower_path(i), method: :delete, data: { confirm: 'Точно удалить?' } do
+              i.fa.fa-times
+.paginate
+  = will_paginate @flowers

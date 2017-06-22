@@ -1,0 +1,13 @@
+= form_for :session, url: session_path do |form|
+  .text-field
+    h4
+      | Email
+  .text-field
+    = form.text_field :email, type: 'email'
+  .text-field
+    h4
+      | Пароль
+  .text-field
+    = form.password_field :password
+  .submit-field
+    = form.submit "Вход", class: "submit-op"

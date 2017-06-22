@@ -1,0 +1,54 @@
+doctype html
+html
+  head
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    = csrf_meta_tags
+    = stylesheet_link_tag    'admin/admin', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'admin/slider', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'admin/admin', 'data-turbolinks-track': 'reload'
+
+    title Цветы
+  body
+    .topbar.topbar-fixed.wrapper
+      .position
+        a.btn.btn-back href="/"
+          = "Вернуться к сайту"
+          i.material-icons.icons_align.icon.back keyboard_arrow_right
+      ul.logo
+        = image_tag ("flower.png")
+    .sidebar-wrapper
+      ul.nav
+        li  
+          = active_link_to "/admin/flowers" , wrap_tag: :li, active: :exclusive do
+            i.material-icons.icons_align.icon.green local_florist
+            span.icons_align = "Цветы"
+        li
+          = active_link_to "/admin/categories" , wrap_tag: :li, active: :exclusive do
+            i.material-icons.icons_align.icon.orange storage
+            span.icons_align = "Категории"
+        li
+          = active_link_to "/admin/bouquets" , wrap_tag: :li, active: :exclusive do
+            i.material-icons.icons_align.icon.yellow spa
+            span.icons_align = "Букеты"
+        li
+          = active_link_to "/admin/advices" , wrap_tag: :li, active: :exclusive do
+            i.material-icons.icons_align.icon.blue chat_bubble
+            span.icons_align = "Советы"
+        li
+          = active_link_to "/admin/sliders" , wrap_tag: :li, active: :exclusive do
+            i.material-icons.icons_align.icon.purple slideshow
+            span.icons_align = "Слайдер"
+        li
+        hr
+        - if signed_in?
+          li= link_to sign_out_path, method: :get do
+            i.material-icons.icons_align.icon input
+            span = "Выход"
+        - else
+          li= link_to 'Вход', sign_in_path
+    .container.content-wrapper
+      - flash.each do |key, value|
+          div class=("alert alert-#{key}") = value
+      .content-wrapper
+        = yield

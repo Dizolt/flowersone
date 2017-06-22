@@ -1,0 +1,19 @@
+.slideshow-container
+  - @slides.each do |i|
+    = image_tag (i.img.url(:large)), width: "100%", class: "mySlides fade"
+    a.prev onclick="plusSlides(-1)"
+      i.material-icons.icons_align.icon.back keyboard_arrow_left
+    a.next onclick="plusSlides(1)"
+      i.material-icons.icons_align.icon.back keyboard_arrow_right
+    
+
+h3.up.txt-mid Новые товары
+
+.menu-ind
+  - @new.each do |j|
+    .new-marg.marg-top
+      = link_to flower_path(j.id) do
+        - if !j.attachments.empty?
+          = image_tag (j.attachments.first.img.url(:small)), size: "150x150"
+        - else
+          | Нет изображения

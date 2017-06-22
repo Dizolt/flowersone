@@ -1,0 +1,22 @@
+h1 Букеты
+
+= active_link_to "Добавить букет", "/admin/bouquets/new", class: "btn btn-primary green"
+p
+- if @bouquets.empty?
+  b  Не создано ни одного букета
+- else
+  .bouquet-table
+    table
+      tr
+        th изображение
+        th название
+        th удалить
+      - @bouquets.each do |i|
+        tr
+          -if !i.attachments.empty?
+            td= image_tag (i.attachments.first.img.url(:thumb))
+          -else
+            td= "Нет изображения"
+          td= link_to i.name, admin_bouquet_path(i)
+          td= link_to admin_bouquet_path(i), method: :delete, data: { confirm: 'Точно удалить?' } do
+              i.fa.fa-times

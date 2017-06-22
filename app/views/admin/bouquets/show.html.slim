@@ -1,0 +1,25 @@
+h2 = @bouquet.name
+
+p
+  | Краткое описание: #{@bouquet.title}
+p
+  | Описание: #{@bouquet.description}
+p
+  | Цена: #{@bouquet.price} руб.
+p
+  -if @bouquet.availability != 0 && !@bouquet.availability.nil?
+    | Наличие: #{@bouquet.availability} шт.
+  -else
+    | Нет в наличии
+p
+  - if !@bouquet.attachments.empty?
+  h3 Изображения:
+  br
+  	.box
+  	 .col-12
+	     - @bouquet.attachments.each do |image|
+	       .col-4
+	      	= image_tag(image.img.url(:small))
+    p
+    br
+= link_to "Редактировать", edit_admin_bouquet_path, class: "btn"

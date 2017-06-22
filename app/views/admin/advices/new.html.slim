@@ -1,0 +1,27 @@
+h1 Добавление совета
+
+= form_for [:admin,@advice] do |f|
+  - if @advice.errors.any?
+    h2 Ошибки:
+    ul
+      - @advice.errors.full_messages.each do |err|
+        li
+          = err.humanize
+      p
+  p Название:
+  = f.text_field :name
+  p Краткое описание:
+  = f.text_area :title
+  p Описание:
+  = f.text_area :description
+  h3 Изображения:
+  #attachments
+    = f.fields_for :attachments do |attachment|
+      = render 'attachment_fields', f: attachment
+    .links
+      = link_to_add_association 'Добавить изображение', f, :attachments
+  br
+
+  = f.submit "Создать", class: "btn btn-primary green"
+.position.top
+  = link_to 'Назад', admin_advices_path, class: "btn"

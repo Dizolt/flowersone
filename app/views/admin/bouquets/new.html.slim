@@ -1,0 +1,31 @@
+h1 Добавление букета
+
+= form_for [:admin,@bouquet] do |f|
+  - if @bouquet.errors.any?
+    h2 Ошибки:
+    ul
+      - @bouquet.errors.full_messages.each do |err|
+        li
+          = err.humanize
+      p
+  p Название:
+  = f.text_field :name
+  p Краткое описание:
+  = f.text_area :title
+  p Описание:
+  = f.text_area :description
+  p Цена:
+  = f.number_field :price
+  p Наличие:
+  = f.number_field :availability
+  h3 Изображения:
+  #attachments
+    = f.fields_for :attachments do |attachment|
+      = render 'attachment_fields', f: attachment
+    .links
+      = link_to_add_association 'Добавить изображение', f, :attachments
+  br
+
+  = f.submit "Создать", class: "btn btn-primary green"
+.position.top
+  = link_to 'Назад', admin_flowers_path, class: "btn"
