@@ -24,4 +24,7 @@ Rails.application.routes.draw do
       resources :attachments
     end
   end
+
+  get '*path' => redirect('/')
+  
 end
