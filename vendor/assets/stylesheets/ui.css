@@ -174,7 +174,7 @@ html, body { height: 100%; }
   display: flex;
   flex-flow:row-nowrap;
   float: right;
-  visibility: hidden;}
+  display: none;}
 
 .txt {
 	color: #fff;
