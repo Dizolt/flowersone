@@ -4,7 +4,7 @@ h1 Цветы
   = f.select(:by_category,@filterrific.select_options[:by_category], { include_blank: 'Выберите категорию' }, class: "form-control")
   .position
     = link_to 'Очистить', reset_filterrific_url, class: "btn btn-primary clear"
-    = f.submit 'Выбрать', class: "btn", style: "margin-left: 5px;"
+    = f.submit 'Выбрать', class: "btn marg-btn-top", style: "margin-left: 5px;"
     p
 
 = link_to "Добавить цветы", "/admin/flowers/new", class: "btn btn-primary green"

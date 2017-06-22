@@ -273,14 +273,15 @@ ol {
       span {display: none;} }
   @media (max-width: 424px) {
     .sidebar-wrapper {
-      width: 0px;}
+      width: 60px;}
       span {display: none;}
-      .icon {margin-left: -10px;}
       .back{margin-left: -1px;} }
   @media (min-width: 768px) {
     .sidebar-wrapper {
       width: 250px; } }
-
+  @media (max-width: 375px) {
+    .icon {margin-left: -10px;}
+    hr {margin-left: 15px;}}
 .content-wrapper {
   position: relative;
   overflow: hidden; 
@@ -290,6 +291,12 @@ ol {
       position: relative;
       overflow: hidden;
       margin-right: 0px;}}
+
+.marg-btn-top {margin-top: 0px;}
+@media only screen and (max-width: 375px){
+  .marg-btn-top{
+    margin-left: 0px;
+    margin-top: 10px;}}
 
 .sidebar-wrapper .nav {
   margin: 0.75em 1em; }
@@ -318,7 +325,7 @@ ol {
 
 .sidebar-wrapper + .content-wrapper {
   padding-left: 0; }
-  @media (min-width: 425px) {
+  @media (max-width: 425px) {
     .sidebar-wrapper + .content-wrapper {
       padding-left: 50px; } }
   @media (min-width: 768px) {
